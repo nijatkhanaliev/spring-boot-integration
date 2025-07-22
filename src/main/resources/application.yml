@@ -1,0 +1,7 @@
+spring:
+  application:
+   name: spring-boot-integration
+   url: http://localhost:8585/api
+
+server:
+  port: 8787
