@@ -1,14 +1,16 @@
-package com.company.model.dto;
+package com.company.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Setter
 @Getter
-public class UserDto {
+@ToString
+public class UserResponse {
     private long id;
     private String firstName;
     private String lastName;

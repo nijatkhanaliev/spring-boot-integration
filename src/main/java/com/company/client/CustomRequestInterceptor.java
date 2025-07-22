@@ -14,7 +14,7 @@ public class CustomRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        String langValue = webUtils.getLangFromHeader();
-        requestTemplate.header("lang", langValue);
+//        String langValue = webUtils.getLangFromHeader();
+//        requestTemplate.header("lang", langValue);
     }
 }
