@@ -1,24 +1,27 @@
-package com.company.service;
+package com.company.scheduler;
 
 import com.company.client.UserClient;
 import com.company.model.dto.request.UserRequest;
 import com.company.model.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Slf4j
-@Service
+@Component
 @RequiredArgsConstructor
-public class UserService {
+public class UserScheduler {
 
     private final UserClient userClient;
     private int i = 0;
 
+    @SchedulerLock(name = "TaskScheduler_scheduledTask",
+            lockAtLeastFor = "PT5S", lockAtMostFor = "PT10S")
     @Scheduled(cron ="* 50 16 ? * TUE" )
     public void createUser(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -34,5 +37,11 @@ public class UserService {
         log.info("UserResponse: { {} }",userResponse);
     }
 
+    @SchedulerLock(name = "TaskScheduler_scheduledTask",
+            lockAtLeastFor = "PT5S", lockAtMostFor = "PT10S")
+    @Scheduled(fixedRate = 2000)
+    public void printHello(){
+        log.info("hello");
+    }
 
 }
